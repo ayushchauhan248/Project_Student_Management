@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import AppContainerPage from './pages/AppContainer.Page';
+import AuthPage from './pages/Auth.Page';
+import NotFoundPage from './pages/NotFound.Page';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div>
+    <BrowserRouter>
+      <Switch>
+
+        <Route path="/" exact>
+          <Redirect to="/login"></Redirect>
+        </Route>
+        
+        <Route path={["/login" , "/signup"]} exact>
+          <AuthPage></AuthPage>
+        </Route>
+
+        <Route path={["/dashboard" , "/recordings" , "/batch/:batchNumber/lecture/:lectureNumber"]} exact>
+          <AppContainerPage></AppContainerPage>
+        </Route>
+
+        <Route >
+           <NotFoundPage></NotFoundPage>
+        </Route>
+
+      </Switch>
+    </BrowserRouter>
+  </div>);
+  
 }
 
 export default App;
