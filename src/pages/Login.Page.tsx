@@ -2,8 +2,9 @@ import {FC , memo}  from  "react";
 import { Link, useHistory } from "react-router-dom";
 import {FaSpinner} from "react-icons/fa"
 import * as yup from "yup";
-import { Formik, useFormik } from "formik";
+import {  useFormik } from "formik";
 import Button  from "../components/Button/Button";
+import { login } from "../api/auth";
 
 
 interface Props {}
@@ -20,11 +21,9 @@ const Login: FC<Props> = (props) => {
             password : yup.string().required().min(8 , ({min}) => `Atleast ${min} characters`) 
         }),
         onSubmit : (data ) => {
-            console.log("form submitting" , data);
-            setTimeout(() => {
-                history.push("/dashboard");
-                console.log("setSubmitting succes");
-            },5000);     
+         login(data).then(()=>
+            history.push("/dashboard") 
+         )      
         },
     });
 
@@ -38,9 +37,6 @@ const Login: FC<Props> = (props) => {
 
                 </div>
                 <div className="font-medium"><p>New Here? <Link to="/signup"><span className="text-blue-500 underline ">Create an account</span></Link></p></div>
-
-
-
 
 
                 <form className="mt-8 space-y-6"
