@@ -1,17 +1,21 @@
+
 import {FC , memo}  from  "react";
 import { Route, Switch } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { User } from "../../modules/User";
 import DashboardPage from "./Dashboard.Page";
 import LecturePage from "./Lecture.Page";
 import RecordingPage from "./Recordings.Page";
 
-interface Props {}
+interface Props {
+    user:User;
+}
 
-const AppContainer: FC<Props> = (props) => {
+const AppContainer: FC<Props> = ({user}) => {
     return(
         <div className="flex flex-row ">
 
-            <Sidebar></Sidebar>
+            <Sidebar user={user} ></Sidebar>
 
             <Switch>
                 

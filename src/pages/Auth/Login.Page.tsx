@@ -5,9 +5,11 @@ import * as yup from "yup";
 import {  useFormik } from "formik";
 import Button  from "../../components/Button/Button";
 import { login } from "../../api/auth";
+import { User } from "../../modules/User";
 
-
-interface Props {}
+interface Props{
+    onLogin: (user:User) => void;
+}
 
 const Login: FC<Props> = (props) => {
     const history = useHistory();
@@ -21,9 +23,10 @@ const Login: FC<Props> = (props) => {
             password : yup.string().required().min(8 , ({min}) => `Atleast ${min} characters`) 
         }),
         onSubmit : (data ) => {
-         login(data).then(()=>
+         login(data).then((u)=>{
+            props.onLogin(u)
             history.push("/dashboard") 
-         )      
+          } )  ;    
         },
     });
 
