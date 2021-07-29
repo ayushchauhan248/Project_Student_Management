@@ -3,8 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import {FaSpinner} from "react-icons/fa"
 import * as yup from "yup";
 import {  useFormik } from "formik";
-import Button  from "../components/Button/Button";
-import { login } from "../api/auth";
+import Button  from "../../components/Button/Button";
+import { login } from "../../api/auth";
 
 
 interface Props {}
@@ -85,7 +85,7 @@ const Login: FC<Props> = (props) => {
                     <div>
                     </div>
                     <div className = "flex ">
-                        <Button theme = "secondary">Log in</Button>
+                        <Button theme = "primary" type = "submit">Log in</Button>
                         {isSubmitting && <FaSpinner className="animate-spin m-3"></FaSpinner>}
                     </div>
 
