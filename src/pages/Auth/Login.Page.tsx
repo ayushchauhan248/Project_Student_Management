@@ -5,30 +5,32 @@ import * as yup from "yup";
 import {  useFormik } from "formik";
 import Button  from "../../components/Button/Button";
 import { login } from "../../api/auth";
-import { User } from "../../modules/User";
+import { authActions } from "../../actions/auth.actions";
 
 interface Props{
-    onLogin: (user:User) => void;
 }
 
 const Login: FC<Props> = (props) => {
     const history = useHistory();
-    const {handleSubmit ,getFieldProps, touched ,isSubmitting , errors} =  useFormik({
+    const {handleSubmit ,getFieldProps, touched ,isSubmitting , errors , isValid} =  useFormik({
         initialValues : {
             email : "",
             password : ""
         },
+        isInitialValid : false,
         validationSchema: yup.object().shape({
             email : yup.string().required("This feild is required").email(),
             password : yup.string().required().min(8 , ({min}) => `Atleast ${min} characters`) 
         }),
         onSubmit : (data ) => {
          login(data).then((u)=>{
-            props.onLogin(u)
+            authActions.login(u)
             history.push("/dashboard") 
           } )  ;    
         },
     });
+
+    console.log("is login form valid" , isValid);
 
    
     
@@ -88,7 +90,7 @@ const Login: FC<Props> = (props) => {
                     <div>
                     </div>
                     <div className = "flex ">
-                        <Button theme = "primary" type = "submit">Log in</Button>
+                        <Button theme = "primary" type = "submit" disabled={!isValid}>Log in</Button>
                         {isSubmitting && <FaSpinner className="animate-spin m-3"></FaSpinner>}
                     </div>
 
@@ -127,3 +129,4 @@ const Login: FC<Props> = (props) => {
 Login.defaultProps = {}
 
 export default memo(Login);
+

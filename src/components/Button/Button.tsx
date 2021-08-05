@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import {FC , memo}  from  "react";
 import {ButtonHTMLAttributes} from  "react";
 
@@ -13,7 +14,7 @@ const Button: FC<Props> = ({children , className ,theme , ...rest}) => {
         <button
         {...rest}
             type="submit"
-            className={"group relative w-4/3 shadow-DEFAULT  flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white  " + themeClasses  + " "  + className }
+            className={classNames("group relative w-4/3 shadow-DEFAULT  flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white  disabled:cursor-not-allowed " , themeClasses  , className )}
         >
             {children}
         </button>         
