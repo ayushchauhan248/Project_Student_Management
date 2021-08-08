@@ -1,7 +1,9 @@
+import { Entity } from "./Entity";
 import { State } from "./State";
 import { User } from "./User";
 
-export interface Group {
+export interface Group extends Entity
+{
     id:                   number;
     name:                 string;
     is_private:           boolean;
