@@ -13,7 +13,7 @@ export const getIds = (entities : Entity[]) =>{
 export const addOne = (state:EntityState , entity : Entity) =>{
     return {
         ...state,
-        [entity.id] : entity
+        byId : {...state.byId , [entity.id] : entity}
     }
 }
 

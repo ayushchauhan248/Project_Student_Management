@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import {FC , memo}  from  "react";
+import { FaSpinner } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { groupsActions } from "../../actions/groups.actions";
-import { fetchGroups } from "../../api/groups";
-import { groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
+import { fetchGroups } from "../../middlewares/group.middleware";
+import { groupsLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 
 interface Props {}
@@ -12,14 +11,10 @@ const Dashboard: FC<Props> = () => {
 
     const query = useAppSelector(groupQuerySelector);
 
+    const Loading = useAppSelector(groupsLoadingSelector)
+
     const groups = useAppSelector(groupsSelector);
 
-
-    useEffect(() => {
-        fetchGroups({ status : "all-groups" , query}).then((groups) => 
-            groupsActions.queryCompleted(query , groups)
-        ) 
-    } , [query]);
 
     return(
         <div>
@@ -30,14 +25,16 @@ const Dashboard: FC<Props> = () => {
             value={query} 
             onChange={(e)=>
             {
-                groupsActions.query(e.target.value)
+                fetchGroups({query:e.target.value , status: "all-groups"})
             }}/>
+            {Loading &&  <FaSpinner className="animate-spin m-3"></FaSpinner> }
             <div>
                 {
                     groups.map((group) => (
                         <div key= { group.id }>{group.name}</div>
                     ))
                 }
+                {!Loading && groups.length === 0 &&  " NO DATA FOUND "}
             </div>
         </div>
     );

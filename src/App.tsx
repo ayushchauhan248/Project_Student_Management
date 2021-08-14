@@ -1,10 +1,9 @@
 import { useEffect} from 'react';
 import  { FC,  Suspense } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { authActions } from './actions/auth.actions';
-import { me } from './api/auth';
 import { LS_AUTH_TOKEN } from './api/base';
 import { useMe } from './hooks/useMe';
+import { me } from './middlewares/auth.middleware';
 import AppContainerPageLazy from './pages/AppContainer/AppContain.lazy';
 import AuthLazy from './pages/Auth/Auth.lazy';
 import NotFoundPage from './pages/NotFound.Page';
@@ -22,8 +21,8 @@ const App: FC<Props> = () => {
   useEffect(()=>{
     if(!token){
       return;
-    }
-    me().then((u) => authActions.fetch(u))
+    } 
+    me();
   },[]); //eslint-disable-line react-hooks/exhaustive-deps
 
 
