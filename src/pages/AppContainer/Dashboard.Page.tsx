@@ -1,7 +1,8 @@
 import {FC , memo}  from  "react";
 import { FaSpinner } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchGroups } from "../../middlewares/group.middleware";
+import { groupQureyChangedAction } from "../../actions/groups.actions";
 import { groupsLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
 
@@ -15,6 +16,8 @@ const Dashboard: FC<Props> = () => {
 
     const groups = useAppSelector(groupsSelector);
 
+    const dispatch = useDispatch();
+
 
     return(
         <div>
@@ -25,7 +28,7 @@ const Dashboard: FC<Props> = () => {
             value={query} 
             onChange={(e)=>
             {
-                fetchGroups({query:e.target.value , status: "all-groups"})
+                dispatch(groupQureyChangedAction(e.target.value))
             }}/>
             {Loading &&  <FaSpinner className="animate-spin m-3"></FaSpinner> }
             <div>
