@@ -6,6 +6,7 @@ import Sidebar from "../../components/Sidebar";
 import DashboardPage from "./Dashboard.Page";
 import LecturePage from "./Lecture.Page";
 import RecordingPage from "./Recordings.Page";
+import GroupDetailPage from "./GroupDetailPage.Page";
 
 interface Props {
 }
@@ -22,6 +23,10 @@ const AppContainer: FC<Props> = () => {
                 
                 <Route path="/dashboard">
                     <DashboardPage></DashboardPage>
+                </Route>
+
+                <Route path="/groups/:groupId">
+                    <GroupDetailPage></GroupDetailPage>
                 </Route>
 
                 <Route path="/recordings">
