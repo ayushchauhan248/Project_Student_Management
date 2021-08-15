@@ -16,6 +16,6 @@ interface GroupResponse{
 export const fetchGroups = (data : GroupRequest , token? : CancelToken) => {
     const url = BASE_URL + "/groups";
 
-    return axios.get<GroupResponse>(url,{params:data , cancelToken : token}).then((response ) =>response.data.data);
+    return axios.get<GroupResponse>(url,{params:data , cancelToken : token})
         
 }

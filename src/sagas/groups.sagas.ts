@@ -5,11 +5,11 @@ import { groupQureyCompletedAction } from "../actions/groups.actions";
 import {  fetchGroups as fetchGroupsApi } from "../api/groups";
 
 export function* fetchGroups (action : AnyAction) : Generator<any>{
-    const output : any = yield call(fetchGroupsApi , {
+    const groupRes : any = yield call(fetchGroupsApi , {
         query: action.payload,
         status : "all-groups"
     })
-    yield put(groupQureyCompletedAction(action.payload , output))
+    yield put(groupQureyCompletedAction(action.payload , groupRes.data.data))
 }
 
 export function* watchGroupQueryChanged(){
