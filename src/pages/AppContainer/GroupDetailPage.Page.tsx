@@ -13,6 +13,8 @@ return (
     <br />
     <br />
     <div><Link to="/dashboard">back to the all groups </Link></div>
+    <Link to={"/groups/" + (groupId - 1)}>prev group</Link>
+    <Link to={"/groups/" + (groupId + 1)}>next group</Link>
  </>
 );
 };
