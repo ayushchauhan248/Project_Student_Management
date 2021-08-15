@@ -5,14 +5,15 @@ import Button from './Button/Button';
 import { useAppSelector } from '../store';
 import { meSelector } from '../selectors/auth.selectors';
 import SearchBar from './SearchBar';
+import {FaAlignJustify} from "react-icons/fa";
 
 
 interface Props {
-    
+    sidebarToggle: () => void;
 }
 
 
-const Navbar: FC<Props> = () => {
+const Navbar: FC<Props> = ({sidebarToggle}) => {
 
     const user = useAppSelector(meSelector); 
     
@@ -35,6 +36,14 @@ const Navbar: FC<Props> = () => {
                         </Button>
                     </div>
                 </div>
+            </div>
+            <div className="bg-white px-10 py-4 ">
+                <div className="flex flex-row items-center">
+                    <FaAlignJustify onClick={sidebarToggle}></FaAlignJustify>
+                    <div className= " px-6">
+                    Learn together
+                    </div>
+                </div>     
             </div>
         </div>
     );
