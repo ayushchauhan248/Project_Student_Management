@@ -21,9 +21,9 @@ axios.interceptors.response.use(undefined , (error) => {
 
 export const get = <T>(url : string , config? : AxiosRequestConfig) => {
     console.log("cancel" , CANCEL)
-     const source = axios.CancelToken.source();
-     const response = axios.get<T>(url ,{...config , cancelToken : source.token});
-     response.myCancelor= source.cancel;
-     return response;
+    const source = axios.CancelToken.source();
+    const response = axios.get<T>(url ,{...config , cancelToken : source.token});
+    response[CANCEL]= source.cancel;
+    return response;
 }
     
