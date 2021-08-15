@@ -1,5 +1,5 @@
 
-import {FC , memo}  from  "react";
+import {FC , memo, useState}  from  "react";
 import { Route, Switch } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
@@ -11,11 +11,12 @@ interface Props {
 }
 
 const AppContainer: FC<Props> = () => {
+    const [showSidebar, setShowSidebar] = useState(true);
     return(
         <div >
-            <Navbar></Navbar>
+            <Navbar sidebarToggle={() => setShowSidebar(!showSidebar)}></Navbar>
             <div className="flex flex-row ">
-            <Sidebar  ></Sidebar>
+            <Sidebar isVisible={showSidebar}></Sidebar>
 
             <Switch>
                 
