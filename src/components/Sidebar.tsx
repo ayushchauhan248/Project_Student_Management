@@ -5,15 +5,15 @@ import {  useAppSelector } from "../store";
 import Button from "./Button/Button";
 
 interface Props {
- 
+  isVisible: boolean;
 }
 
-const Sidebar: FC<Props> = () => {
+const Sidebar: FC<Props> = ({isVisible}) => {
 
   const user = useAppSelector(meSelector); 
 
     return(
-      <div className="h-screen w-80 bg-gray-400 ">
+      <div className={`bg-gray-100 w-72 ${(isVisible) ? "" : "hidden"} p-3`}>
         <div>this is side bar</div>
         <div className="bg-red-200">{user!.first_name}</div>
         <Button onClick = {() =>{
