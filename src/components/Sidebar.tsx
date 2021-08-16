@@ -7,7 +7,6 @@ import Button from "./Button/Button";
 interface Props {
   isVisible: boolean;
 }
-
 const Sidebar: FC<Props> = ({isVisible}) => {
 
   const user = useAppSelector(meSelector); 
