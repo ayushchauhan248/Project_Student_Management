@@ -3,15 +3,14 @@ import {FC, memo} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { groupFetchOneAction } from "../../actions/groups.actions";
-import { groupByIdSelector } from "../../selectors/groups.selectors";
+import { groupByIdSelector, selectedGroupSelector } from "../../selectors/groups.selectors";
 interface Props{
 }
 const GroupDetailPage: FC<Props> = (props) =>{
 
     const groupId = +useParams<{groupId : string}>().groupId;
-    const groupById = useSelector(groupByIdSelector);
 
-    const group = groupById[groupId]
+    const group = useSelector(selectedGroupSelector);
 
     const dispatch = useDispatch()
    
