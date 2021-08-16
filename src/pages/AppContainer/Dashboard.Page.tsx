@@ -2,7 +2,7 @@
 import {FC , memo}  from  "react";
 import { FaSpinner } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { groupQureyChangedAction } from "../../actions/groups.actions";
 import { groupsLoadingSelector, groupQuerySelector, groupsSelector } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../store";
@@ -16,9 +16,8 @@ const Dashboard: FC<Props> = () => {
     const Loading = useAppSelector(groupsLoadingSelector)
 
     const groups = useAppSelector(groupsSelector);
-    const history = useHistory();
+    
     const dispatch = useDispatch();
-
 
     return(
         <div>
@@ -35,7 +34,7 @@ const Dashboard: FC<Props> = () => {
             <div>
                 {
                     groups.map((group) => (
-                        <div key= { group.id }  onClick={() => history.push("/groups/" + group.id)}>{group.name}</div>
+                        <div key= { group.id }>  <Link to={"/groups/" + group.id}>{group.name}</Link></div>
                     ))
                 }
                 {!Loading && groups.length === 0 &&  " NO DATA FOUND "}
