@@ -4,7 +4,15 @@ export interface EntityState<T extends Entity = Entity> {
     byId : {
        [id:number] : T;
     }
-    selectedId? : number
+    selectedId? : number;
+    loadingOne : boolean;
+    loadingList : boolean;
+}
+
+export const initialEntityState = {
+    byId : {},
+    loadingOne : false,
+    loadingList : false,
 }
 
 export const getIds = (entities : Entity[]) =>{
@@ -14,7 +22,8 @@ export const getIds = (entities : Entity[]) =>{
 export const select = (state:EntityState , id: number) =>{
     return {
         ...state,
-        selectedId : id
+        selectedId : id,
+        loadingOne : true
     }
 }
 
