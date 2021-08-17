@@ -19,7 +19,7 @@ export const groupByIdSelector =  createSelector(
 
 export const groupsLoadingSelector =  createSelector(
     [groupStateSelector],
-    (groupState) => groupState.loading
+    (groupState) => groupState.loadingList
 )
 
 
