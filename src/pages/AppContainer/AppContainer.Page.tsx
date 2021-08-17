@@ -1,49 +1,52 @@
-
-import {FC , memo, useState}  from  "react";
+import { useState } from "react";
+import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
-import Navbar from "../../components/Navbar";
+import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
 import DashboardPage from "./Dashboard.Page";
-import LecturePage from "./Lecture.Page";
-import RecordingPage from "./Recordings.Page";
-import GroupDetailPage from "./GroupDetailPage.Page";
+import EditProfilePage from "./EditProfile,Page";
+import GroupDetailPage from "./GroupDetail.Page";
+import GroupsPage from "./Groups.page";
+import RecordingsPage from "./Recordings.Page";
 
-interface Props {
-}
+
+interface Props{}
 
 const AppContainer: FC<Props> = () => {
-    const [showSidebar, setShowSidebar] = useState(true);
-    return(
-        <div >
-            <Navbar sidebarToggle={() => setShowSidebar(!showSidebar)}></Navbar>
-            <div className="flex flex-row ">
-            <Sidebar isVisible={showSidebar}></Sidebar>
+    console.log("AppContainer Rerendering");
+    const [showSidebar , setShowSideBar]=useState(true);
+    
+    return (
 
+        <div className=" ">
+         
+            <NavBar sidebarToggle={()=>setShowSideBar(!showSidebar)} ></NavBar>
+            <div className=" flex flex-row">
+            
+            <Sidebar Open={showSidebar}></Sidebar>
             <Switch>
-                
+
                 <Route path="/dashboard">
                     <DashboardPage></DashboardPage>
                 </Route>
-
                 <Route path="/groups/:groupId">
                     <GroupDetailPage></GroupDetailPage>
                 </Route>
-
                 <Route path="/recordings">
-                    <RecordingPage></RecordingPage>
+                    <RecordingsPage></RecordingsPage>
                 </Route>
-
-                <Route path="/batch/:batchNumber/lecture/:lectureNumber">
-                    <LecturePage></LecturePage>
+                <Route path="/groups">
+                    <GroupsPage></GroupsPage>
                 </Route>
-
+                <Route path="/editProfile">
+                    <EditProfilePage></EditProfilePage>
+                </Route>
             </Switch>
             </div>
+
         </div>
-        
     );
 };
-
-AppContainer.defaultProps = {}
-
+AppContainer.defaultProps = {
+}
 export default memo(AppContainer);
